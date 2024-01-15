@@ -2,6 +2,7 @@ class Stock(object):
     def __init__(self):
         self.orders_chain = []
 
+    # Add or Remove order
     def manage_order(self, action_type, order='-', price=-1.0, quantity=-1, index=-1):
         if action_type == 'Remove' and self.orders_chain:
             if next((element for element in self.orders_chain if element["Id"] == index), None):
@@ -27,9 +28,7 @@ class Stock(object):
 
         return order
 
-    def remove_order(self, index=-1):
-        self.orders_chain.pop(index)
-
+    # Display current best sell and buy orders
     def display_best(self):
         """
         1) find highest buy order(s) and lowest sell order(s) and separate them
@@ -58,6 +57,7 @@ class Stock(object):
         print()
         return [best_buy, best_sell]
 
+    # find best sell and buy order
     def sort_orders(self):
         buy_orders = [buy_order for count, buy_order in enumerate(self.orders_chain) if
                       self.orders_chain[count]['Order'] == 'Buy']
@@ -69,6 +69,7 @@ class Stock(object):
 
         return [sorted_buy, sorted_sell]
 
+    # Calculate sum of given best buy and sell orders
     @staticmethod
     def sum_orders(sorted_lists):
         summed_orders = []
@@ -97,11 +98,12 @@ stock.manage_order(order='Buy', action_type="Add", price=50.0, quantity=100)
 stock.manage_order(order='Buy', action_type="Add", price=150.0, quantity=200)
 stock.manage_order(order='Buy', action_type="Add", price=150.0, quantity=200)
 stock.manage_order(order='Sell', action_type="Add", price=50.0, quantity=100)
-stock.manage_order(order='Sell', action_type="Add", price=50.0, quantity=100)
+stock.manage_order(order='Sell', action_type="Add", price=50.0, quantity=300)
 stock.manage_order(order='Sell', action_type="Add", price=650.0, quantity=100)
 stock.manage_order(action_type="Remove", index=1)
 stock.manage_order(action_type="Remove", index=2)
 
+# Display history of order management
 if stock.orders_chain:
     print("    ".join(stock.orders_chain[0].keys()))
     for order in stock.orders_chain:
