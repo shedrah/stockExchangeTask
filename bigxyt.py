@@ -103,6 +103,7 @@ stock.manage_order(order='Sell', action_type="Add", price=650.0, quantity=100)
 stock.manage_order(action_type="Remove", index=1)
 stock.manage_order(action_type="Remove", index=2)
 
+
 # Display history of order management
 if stock.orders_chain:
     print("    ".join(stock.orders_chain[0].keys()))
